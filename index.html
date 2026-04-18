@@ -6,12 +6,18 @@
     <title>Bitcoin Clicker | Frojy Games</title>
 
     <style>
+
+        /* CUSTOM FONT */
+        @font-face {
+            font-family: 'CustomFont';
+            src: url('fonts/SyneMono-Regular.ttf');
+        }
+
         body {
-            background-color: #ece75f; /* lighter yellow */
-            font-family: Arial;
+            background-color: #ece75f;
+            font-family: 'CustomFont', Arial;
             margin: 0;
 
-            /* center everything */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -25,11 +31,22 @@
             margin-bottom: 20px;
         }
 
+        /* wrapper fixes spin + shrink conflict */
+        .coin-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: spin 4s linear infinite;
+        }
+
         img {
             width: 300px;
             cursor: pointer;
             transition: transform 0.1s;
-            animation: spin 4s linear infinite;
+        }
+
+        .shrink {
+            transform: scale(0.92);
         }
 
         @keyframes spin {
@@ -37,9 +54,6 @@
             to { transform: rotate(360deg); }
         }
 
-        .shrink {
-            transform: scale(0.95);
-        }
     </style>
 </head>
 
@@ -47,7 +61,9 @@
 
     <h1 id="score">0</h1>
 
-    <img id="coin" src="images/bitcoin.png" onclick="addScore()">
+    <div class="coin-wrapper" id="wrapper">
+        <img id="coin" src="images/bitcoin.png" onclick="addScore()">
+    </div>
 
     <script>
         let score = 0;
@@ -62,11 +78,10 @@
             score++;
             document.getElementById("score").innerText = score;
 
-            // save progress
             localStorage.setItem("score", score);
 
-            // shrink effect
             let coin = document.getElementById("coin");
+
             coin.classList.add("shrink");
 
             setTimeout(() => {
