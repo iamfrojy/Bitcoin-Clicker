@@ -21,6 +21,17 @@
         img {
             width: 300px;
             cursor: pointer;
+            transition: transform 0.1s;
+            animation: spin 4s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .shrink {
+            transform: scale(0.95);
         }
     </style>
 </head>
@@ -29,14 +40,28 @@
 
     <h1 id="score">0</h1>
 
-    <img src="images/bitcoin.png" onclick="addScore()">
+    <img id="coin" src="images/bitcoin.png" onclick="addScore()">
 
     <script>
         let score = 0;
 
+        if (localStorage.getItem("score")) {
+            score = parseInt(localStorage.getItem("score"));
+            document.getElementById("score").innerText = score;
+        }
+
         function addScore() {
             score++;
             document.getElementById("score").innerText = score;
+
+            localStorage.setItem("score", score);
+            
+            let coin = document.getElementById("coin");
+            coin.classList.add("shrink");
+
+            setTimeout(() => {
+                coin.classList.remove("shrink");
+            }, 100);
         }
     </script>
 
