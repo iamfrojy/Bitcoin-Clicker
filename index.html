@@ -7,15 +7,22 @@
 
     <style>
         body {
-            background-color: yellow;
-            text-align: center;
+            background-color: #fff9c4; /* lighter yellow */
             font-family: Arial;
+            margin: 0;
+
+            /* center everything */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
         }
 
         #score {
             color: white;
             font-size: 40px;
-            margin-top: 50px;
+            margin-bottom: 20px;
         }
 
         img {
@@ -45,6 +52,7 @@
     <script>
         let score = 0;
 
+        // load saved score
         if (localStorage.getItem("score")) {
             score = parseInt(localStorage.getItem("score"));
             document.getElementById("score").innerText = score;
@@ -54,8 +62,10 @@
             score++;
             document.getElementById("score").innerText = score;
 
+            // save progress
             localStorage.setItem("score", score);
-            
+
+            // shrink effect
             let coin = document.getElementById("coin");
             coin.classList.add("shrink");
 
