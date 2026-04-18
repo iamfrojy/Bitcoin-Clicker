@@ -9,15 +9,36 @@
         body {
             background-color: yellow;
             text-align: center;
+            font-family: Arial;
+        }
+
+        #score {
+            color: white;
+            font-size: 40px;
+            margin-top: 50px;
+        }
+
+        img {
+            width: 300px;
+            cursor: pointer;
         }
     </style>
 </head>
 
 <body>
 
-    <h1>Bitcoin Clicker</h1>
+    <h1 id="score">0</h1>
 
-    <img src="images/bitcoin.png" alt="Bitcoin" width="300">
+    <img src="bitcoin.png" onclick="addScore()">
+
+    <script>
+        let score = 0;
+
+        function addScore() {
+            score++;
+            document.getElementById("score").innerText = score;
+        }
+    </script>
 
 </body>
 
